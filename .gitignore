@@ -1,0 +1,9 @@
+node_modules
+
+static
+
+coverage*
+
+secret.js
+
+.idea

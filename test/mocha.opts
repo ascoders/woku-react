@@ -1,0 +1,3 @@
+-r blanket
+-r should
+-r co-mocha
