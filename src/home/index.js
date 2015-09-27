@@ -1,10 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router'
 
-import NavBar from '../common/navbar'
+import NavBar from '../common/navbar/index.js'
 
-const Home = React.createClass({
-    render(){
+export default class Home extends React.Component {
+     render() {
         return (
             <div>
                 <NavBar/>
@@ -13,6 +13,4 @@ const Home = React.createClass({
             </div>
         )
     }
-})
-
-module.exports = Home
+}

@@ -43,7 +43,7 @@ then
   cnpm install should co-mocha muk rewire superagent
 
   cnpm install webpack webpack-dev-server react-hot-loader react-router history
-  cnpm install material-ui react-tap-event-plugin
+  cnpm install material-ui react-tap-event-plugin extract-text-webpack-plugin
 
   exit
 fi

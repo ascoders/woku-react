@@ -2,9 +2,9 @@ import React from 'react'
 import {Router, Route} from 'react-router'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 
-const history = createBrowserHistory()
+import Home from '../../home/index'
 
-const Home = require('../home/index')
+const history = createBrowserHistory()
 
 React.render((
     <Router>

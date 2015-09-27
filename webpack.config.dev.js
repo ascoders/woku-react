@@ -20,10 +20,10 @@ module.exports = {
                 loaders: ['jsx?harmony', 'react-hot', 'babel']
             }, {
                 test: /\.scss/,
-                loader: 'style-loader!css-loader!scss-loader'
+                loader: 'style!css!sass'
             }, {
                 test: /\.(png|jpg)$/,
-                loader: 'url-loader?limit=256'
+                loader: 'url?limit=256'
             }
         ]
     },
