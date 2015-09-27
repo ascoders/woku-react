@@ -19,10 +19,11 @@ module.exports = {
                 exclude: /node_modules/,
                 loaders: ['jsx?harmony', 'react-hot', 'babel']
             }, {
-                test: /\.scss/,
+                test: /\.(scss|css)/,
                 loader: 'style!css!sass'
             }, {
                 test: /\.(png|jpg)$/,
+                exclude: /node_modules/,
                 loader: 'url?limit=256'
             }
         ]

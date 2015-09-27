@@ -1,40 +1,40 @@
 import React from 'react'
-import {Toolbar, ToolbarGroup, ToolbarTitle, ToolbarSeparator} from 'material-ui/lib/toolbar'
-import DropDownMenu from 'material-ui/lib/drop-down-menu'
-import DropDownIcon from 'material-ui/lib/drop-down-icon'
-import FontIcon from 'material-ui/lib/font-icon'
-import RaisedButton from 'material-ui/lib/raised-button'
+import {Menu, SubMenu, EnterAnimation} from 'antd'
+import {Link} from 'react-router'
 
 export default class NavBar extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }
+
+    clickPage() {
+        this.setState({
+            enter: {delay: 0.3},
+            leave: {delay: 0}
+        })
+    }
+
     render() {
-        let filterOptions = [
-            {payload: '1', text: 'All Broadcasts'},
-            {payload: '2', text: 'All Voice'},
-            {payload: '3', text: 'All Text'},
-            {payload: '4', text: 'Complete Voice'},
-            {payload: '5', text: 'Complete Text'},
-            {payload: '6', text: 'Active Voice'},
-            {payload: '7', text: 'Active Text'},
-        ]
-
-        let iconMenuItems = [
-            {payload: '1', text: 'Download'},
-            {payload: '2', text: 'More Info'}
-        ]
-
+        var key = this.props.location.pathname
         return (
-            <Toolbar>
-                <ToolbarGroup key={0} float="left">
-                    <DropDownMenu menuItems={filterOptions}/>
-                </ToolbarGroup>
-                <ToolbarGroup key={1} float="right">
-                    <ToolbarTitle text="Options"/>
-                    <FontIcon className="mui-icon-sort"/>
-                    <DropDownIcon iconClassName="icon-navigation-expand-more" menuItems={iconMenuItems}/>
-                    <ToolbarSeparator/>
-                    <RaisedButton label="Create Broadcast" primary={true}/>
-                </ToolbarGroup>
-            </Toolbar>
+            <div>
+                <Menu onClick={this.handleClick} mode="horizontal">
+                    <Menu.Item key="/app">
+                        <Link to="/app" onClick={this.clickPage.bind(this)}>
+                            <i className="anticon anticon-appstore"></i>浏览
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="/blog">
+                        <Link to="/blog" onClick={this.clickPage.bind(this)}>
+                            <i className="anticon anticon-book"></i>博客
+                        </Link>
+                    </Menu.Item>
+                </Menu>
+                <EnterAnimation>
+                    {React.cloneElement(this.props.children, {key: key})}
+                </EnterAnimation>
+            </div>
         )
     }
 }

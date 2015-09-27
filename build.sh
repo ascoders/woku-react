@@ -63,7 +63,7 @@ mocha --harmony $testpath -s 10 --check-leaks --es_staging
 pm2 delete app.js
 
 echo '[run pm2]'
-pm2 start --watch --ignore-watch="src static test node_modules" --merge-logs -i 0 -f app.js -- release
+pm2 start --watch --ignore-watch="src static test node_modules" --merge-logs -f app.js -- release
 
 echo '[run webpack..]'
-webpack --watch
+node webpack.js

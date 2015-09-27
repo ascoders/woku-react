@@ -16,13 +16,11 @@ module.exports = {
                 exclude: /node_modules/,
                 loaders: ['jsx?harmony', 'babel']
             }, {
-                test: /\.scss/,
+                test: /\.(scss|css)/,
                 loader: ExtractTextPlugin.extract("style", "css!sass")
             }, {
-                test: /\.(css)$/,
-                loader: 'style-loader!css-loader'
-            }, {
                 test: /\.(png|jpg)$/,
+                exclude: /node_modules/,
                 loader: 'url-loader?limit=8192'
             }
         ]

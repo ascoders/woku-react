@@ -48,46 +48,46 @@ controllers.forEach(function (path) {
         // 遍历 get post put patch delete
         for (var method in api) {
             switch (method) {
-            case 'get':
-                if (typeof api[method] === 'object') {
-                    api[method].unshift(apiUrl)
-                    router.get.apply(router, api[method])
-                } else if (typeof api[method] === 'function') {
-                    router.get(apiUrl, api[method])
-                }
-                break
-            case 'post':
-                if (typeof api[method] === 'object') {
-                    api[method].unshift(apiUrl)
-                    router.post.apply(router, api[method])
-                } else if (typeof api[method] === 'function') {
-                    router.post(apiUrl, api[method])
-                }
-                break
-            case 'put':
-                if (typeof api[method] === 'object') {
-                    api[method].unshift(apiUrl)
-                    router.put.apply(router, api[method])
-                } else if (typeof api[method] === 'function') {
-                    router.put(apiUrl, api[method])
-                }
-                break
-            case 'patch':
-                if (typeof api[method] === 'object') {
-                    api[method].unshift(apiUrl)
-                    router.patch.apply(router, api[method])
-                } else if (typeof api[method] === 'function') {
-                    router.patch(apiUrl, api[method])
-                }
-                break
-            case 'del':
-                if (typeof api[method] === 'object') {
-                    api[method].unshift(apiUrl)
-                    router.delete.apply(router, api[method])
-                } else if (typeof api[method] === 'function') {
-                    router.delete(apiUrl, api[method])
-                }
-                break
+                case 'get':
+                    if (typeof api[method] === 'object') {
+                        api[method].unshift(apiUrl)
+                        router.get.apply(router, api[method])
+                    } else if (typeof api[method] === 'function') {
+                        router.get(apiUrl, api[method])
+                    }
+                    break
+                case 'post':
+                    if (typeof api[method] === 'object') {
+                        api[method].unshift(apiUrl)
+                        router.post.apply(router, api[method])
+                    } else if (typeof api[method] === 'function') {
+                        router.post(apiUrl, api[method])
+                    }
+                    break
+                case 'put':
+                    if (typeof api[method] === 'object') {
+                        api[method].unshift(apiUrl)
+                        router.put.apply(router, api[method])
+                    } else if (typeof api[method] === 'function') {
+                        router.put(apiUrl, api[method])
+                    }
+                    break
+                case 'patch':
+                    if (typeof api[method] === 'object') {
+                        api[method].unshift(apiUrl)
+                        router.patch.apply(router, api[method])
+                    } else if (typeof api[method] === 'function') {
+                        router.patch(apiUrl, api[method])
+                    }
+                    break
+                case 'del':
+                    if (typeof api[method] === 'object') {
+                        api[method].unshift(apiUrl)
+                        router.delete.apply(router, api[method])
+                    } else if (typeof api[method] === 'function') {
+                        router.delete(apiUrl, api[method])
+                    }
+                    break
             }
         }
     }
