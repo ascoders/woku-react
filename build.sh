@@ -44,6 +44,7 @@ then
 
   cnpm install webpack webpack-dev-server react-hot-loader react-router history
   cnpm install material-ui react-tap-event-plugin extract-text-webpack-plugin
+  cnpm install autoprefixer-loader
 
   exit
 fi

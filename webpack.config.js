@@ -14,10 +14,10 @@ module.exports = {
             {
                 test: /\.js?$/,
                 exclude: /node_modules/,
-                loaders: ['jsx?harmony', 'babel']
+                loaders: ['jsx', 'babel']
             }, {
                 test: /\.(scss|css)/,
-                loader: ExtractTextPlugin.extract("style", "css!sass")
+                loader: ExtractTextPlugin.extract("style", "css!autoprefixer!sass")
             }, {
                 test: /\.(png|jpg)$/,
                 exclude: /node_modules/,
@@ -26,6 +26,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin("[name].css")
+        new ExtractTextPlugin("main.css", {allChunks: true})
     ]
 }

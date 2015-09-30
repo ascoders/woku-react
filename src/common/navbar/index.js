@@ -11,7 +11,7 @@ export default class NavBar extends React.Component {
     clickPage() {
         this.setState({
             enter: {delay: 0.3},
-            leave: {delay: 0}
+            leave: {delay: 0, duration: 0.3}
         })
     }
 
@@ -30,8 +30,18 @@ export default class NavBar extends React.Component {
                             <i className="anticon anticon-book"></i>博客
                         </Link>
                     </Menu.Item>
+                    <Menu.Item key="/login">
+                        <Link to="/login" onClick={this.clickPage.bind(this)}>
+                            登录
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="/register">
+                        <Link to="/register" onClick={this.clickPage.bind(this)}>
+                            注册
+                        </Link>
+                    </Menu.Item>
                 </Menu>
-                <EnterAnimation>
+                <EnterAnimation enter={this.state.enter} leave={this.state.leave}>
                     {React.cloneElement(this.props.children, {key: key})}
                 </EnterAnimation>
             </div>
