@@ -2,11 +2,11 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
     entry: [
-        './src/main.js'
+        './client/src/main.js'
     ],
     output: {
-        path: __dirname + '/static/publish/',
-        publicPath: '/static/publish/',
+        path: __dirname + '/client/static/',
+        publicPath: '/client/static/',
         filename: 'main.js'
     },
     module: {
@@ -22,6 +22,18 @@ module.exports = {
                 test: /\.(png|jpg)$/,
                 exclude: /node_modules/,
                 loader: 'url-loader?limit=8192'
+            }, {
+                test: /\.woff$/,
+                loader: "url?limit=10000&minetype=application/font-woff"
+            }, {
+                test: /\.ttf$/,
+                loader: "file"
+            }, {
+                test: /\.eot$/,
+                loader: "file"
+            }, {
+                test: /\.svg$/,
+                loader: "file"
             }
         ]
     },

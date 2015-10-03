@@ -28,12 +28,12 @@ exports.appKeys = {
 
 // 静态目录
 exports.staticDir = {
-    path: 'static',
+    path: 'client/static',
     maxAge: 365 * 24 * 60 * 60
 }
 
 // 总模版文件
-exports.templatePath = 'src/main.html'
+exports.templatePath = 'client/src/main.html'
 
 // 数据库
 exports.db = {

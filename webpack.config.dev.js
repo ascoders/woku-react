@@ -5,11 +5,11 @@ module.exports = {
     entry: [
         'webpack-dev-server/client?http://localhost:8090',
         'webpack/hot/only-dev-server',
-        './src/main.js'
+        './client/src/main.js'
     ],
     output: {
-        path: __dirname + '/static/publish/',
-        publicPath: '/static/publish/',
+        path: __dirname + '/client/static/',
+        publicPath: '/client/static/',
         filename: 'main.js'
     },
     module: {
@@ -20,11 +20,23 @@ module.exports = {
                 loaders: ['jsx', 'react-hot', 'babel']
             }, {
                 test: /\.(scss|css)/,
-                loader: 'style!css!sass'
+                loader: 'style!css!autoprefixer!sass'
             }, {
                 test: /\.(png|jpg)$/,
                 exclude: /node_modules/,
                 loader: 'url?limit=256'
+            }, {
+                test: /\.woff$/,
+                loader: "url?limit=10000&minetype=application/font-woff"
+            }, {
+                test: /\.ttf$/,
+                loader: "file"
+            }, {
+                test: /\.eot$/,
+                loader: "file"
+            }, {
+                test: /\.svg$/,
+                loader: "file"
             }
         ]
     },
