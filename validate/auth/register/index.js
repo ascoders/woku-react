@@ -6,34 +6,37 @@ export default{
         if (Validator.isNull(data.nickname)) {
             return {
                 ok: false,
-                data: '昵称不能为空'
+                data: '昵称不能为空',
+                code: 'nickname'
+            }
+        }
+
+        if (!Validator.isLength(data.nickname, 2, 10)) {
+            return {
+                ok: false,
+                data: '昵称长度为2-10',
+                code: 'nickname'
             }
         }
 
         if (Validator.isNull(data.password)) {
             return {
                 ok: false,
-                data: '密码不能为空'
-            }
-        }
-
-        if (!Validator.isLength(data.account, 2, 10)) {
-            return {
-                ok: false,
-                data: '昵称长度为2-10'
+                data: '密码不能为空',
+                code: 'password'
             }
         }
 
         if (!Validator.isLength(data.password, 6, 30)) {
             return {
                 ok: false,
-                data: '密码长度为6-30'
+                data: '密码长度为6-30',
+                code: 'password'
             }
         }
 
         return {
-            ok: true,
-            type: type
+            ok: true
         }
     },
 
@@ -42,7 +45,8 @@ export default{
         if (!Validator.isEmail(data.email)) {
             return {
                 ok: false,
-                data: '邮箱格式错误'
+                data: '邮箱格式错误',
+                code: 'email'
             }
         }
 

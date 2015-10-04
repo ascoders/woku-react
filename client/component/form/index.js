@@ -4,7 +4,6 @@ import Radio from 'antd/lib/radio'
 import Tooltip from 'antd/lib/tooltip'
 import Message from 'antd/lib/message'
 import Validator from 'validator'
-import LoginCheck from '../../../validate/auth/login'
 import ReactMixin from 'react-mixin'
 import AjaxMixin from '../../mixin/ajax'
 
@@ -14,79 +13,81 @@ export default class Form extends React.Component {
         this.state = {}
     }
 
-    accountChange(event) {
+    onChange(item, event) {
         this.setState({
-            account: event.target.value
+            [item.name]: event.target.value
         })
-    }
 
-    passwordChange(event) {
-        this.setState({
-            password: event.target.value
-        })
-    }
-
-    submit() {
-        this.post('/api/auth/login', {
-            data: {
-                account: this.state.account,
-                password: this.state.password
-            },
-            preCheck: ()=> {
-                return this.props.precheck()
-            },
-            success: (data)=> {
-
-            },
-            error: (data)=> {
-
-            },
-            before: ()=> {
-                this.setState({
-                    loading: true
-                })
-            },
-            after: ()=> {
-                this.setState({
-                    loading: false
-                })
+        // 改变父级的value
+        this.props.init.fields.map((each, index)=> {
+            if (each.name === item.name) {
+                each.value = event.target.value
             }
         })
     }
 
+    submit() {
+        if (this.props.init.submit.ajax) { // 提交之前发送请求
+            this.ajax(this.props.init.submit.ajax, {
+                data: this.state,
+                method: this.props.init.submit.method,
+                preCheck: ()=> {
+                    return this.props.init.submit.check(this.state)
+                },
+                success: (data)=> {
+                    this.props.init.submit.success(data)
+                },
+                error: (data)=> {
+
+                },
+                before: ()=> {
+                    this.setState({
+                        loading: true
+                    })
+                },
+                after: ()=> {
+                    this.setState({
+                        loading: false
+                    })
+                }
+            })
+        } else {
+            let check = this.props.init.submit.check(this.state)
+            if (!check.ok) {
+                return Message.error(check.data)
+            }
+            this.props.init.submit.success(check)
+        }
+
+    }
+
     render() {
-        var loadingClass = this.state.loading ? 'ant-btn-loading' : ''
+        let loadingClass = this.state.loading ? 'ant-btn-loading' : ''
+
+        let formItems = this.props.init.fields.map((item, index)=> {
+            return (
+                <div className="ant-form-item" key={item.name}>
+                    <label htmlFor={item.name} className="col-6" required>{item.title}：</label>
+
+                    <div className="col-18">
+                        <Tooltip title={item.tooltip}>
+                            <input className="ant-input" type={item.type} id={item.name} placeholder={item.placeholder}
+                                   defaultValue={item.value}
+                                   onChange={this.onChange.bind(this,item)}
+                                   value={null}/>
+                        </Tooltip>
+                    </div>
+                </div>
+            )
+        })
 
         return (
             <div className="ant-form-horizontal">
-                <div className="ant-form-item">
-                    <label htmlFor="account" className="col-6" required>帐号：</label>
-
-                    <div className="col-18">
-                        <Tooltip title="长度2-10">
-                            <input className="ant-input" type="text" id="account" placeholder="帐号 / 邮箱"
-                                   onChange={this.accountChange.bind(this)}
-                                   value={null}/>
-                        </Tooltip>
-                    </div>
-                </div>
-
-                <div className="ant-form-item">
-                    <label htmlFor="password" className="col-6" required>密码：</label>
-
-                    <div className="col-18">
-                        <Tooltip title="长度6-30">
-                            <input className="ant-input" type="password" id="password"
-                                   onChange={this.passwordChange.bind(this)}
-                                   value={null}/>
-                        </Tooltip>
-                    </div>
-                </div>
-
+                {formItems}
                 <div className="row">
                     <div className="col-16 col-offset-6">
                         <button type="submit" className={'ant-btn ant-btn-primary '+loadingClass}
-                                onClick={this.submit.bind(this)}>登录
+                                onClick={this.submit.bind(this)}>{this.props.init.submit.buttonName}
                         </button>
                     </div>
                 </div>

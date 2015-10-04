@@ -18,7 +18,7 @@ function handleResponse(err, res) {
 }
 
 export default{
-    get(url, opts){
+    ajax(url, opts){
         opts.preCheck = opts.preCheck || function () {
             }
         opts.success = opts.success || function () {
@@ -29,6 +29,7 @@ export default{
             }
         opts.after = opts.after || function () {
             }
+        opts.method = opts.method || 'get'
 
         this.opts = opts
 
@@ -40,32 +41,12 @@ export default{
 
         opts.before()
 
-        return Request.get(url).query(opts.data).end(handleResponse.bind(this))
-    },
-
-    post(url, opts){
-        opts.preCheck = opts.preCheck || function () {
-            }
-        opts.success = opts.success || function () {
-            }
-        opts.error = opts.error || function () {
-            }
-        opts.before = opts.before || function () {
-            }
-        opts.after = opts.after || function () {
-            }
-
-        this.opts = opts
-
-        let check = opts.preCheck()
-        if (check && !check.ok) {
-            this.opts.error(check)
-            return Message.error(check.data)
+        switch (this.opts.method) {
+        case 'get':
+            return Request.get(url).query(opts.data).end(handleResponse.bind(this))
+        case 'post':
+            return Request.post(url).send(opts.data).end(handleResponse.bind(this))
         }
-
-        opts.before()
-
-        return Request.post(url).send(opts.data).end(handleResponse.bind(this))
     }
 }
 
