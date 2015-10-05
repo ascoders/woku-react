@@ -34,7 +34,7 @@ exports.index = {
             email.send({
                     to: this.query.email,
                     title: this.query.nickname + '! 请在1小时内激活账号',
-                    content: '<a href="' + conf.web.domain + '/auth/register' + dataUrl + '">点击激活</a>'
+                    content: '<a href="' + conf.web.domain + '/register' + dataUrl + '">点击激活</a>'
                 }
             )
 

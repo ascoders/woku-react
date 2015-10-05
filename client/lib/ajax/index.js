@@ -1,5 +1,5 @@
-import Request from 'superagent'
-import Message from 'antd/lib/message'
+var agent = require('superagent')
+var Message = require('antd/lib/message')
 
 function handleResponse(err, res) {
     this.opts.after()
@@ -17,8 +17,8 @@ function handleResponse(err, res) {
     this.opts.success(res.body)
 }
 
-export default{
-    ajax(url, opts){
+module.exports = {
+    send: function (url, opts) {
         opts.preCheck = opts.preCheck || function () {
             }
         opts.success = opts.success || function () {
@@ -43,11 +43,9 @@ export default{
 
         switch (this.opts.method) {
         case 'get':
-            return Request.get(url).query(opts.data).end(handleResponse.bind(this))
+            return agent.get(url).query(opts.data).end(handleResponse.bind(this))
         case 'post':
-            return Request.post(url).send(opts.data).end(handleResponse.bind(this))
+            return agent.post(url).send(opts.data).end(handleResponse.bind(this))
         }
     }
 }
-
-

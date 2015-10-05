@@ -1,34 +1,47 @@
-import React from 'react'
-import StepBar from '../../../component/step'
-import Styles from './style.js'
-import Form from '../../../component/form'
-import RegisterCheck from '../../../../validate/auth/register'
-import Alert from 'antd/lib/alert'
-import ReactMixin from 'react-mixin'
-import AjaxMixin from '../../../mixin/ajax'
-import Url from 'url'
+const React = require('react')
+const StepBar = require('../../../component/step')
+const Styles = require('./style.js')
+const Form = require('../../../component/form')
+const RegisterCheck = require('../../../../validate/auth/register')
+const Alert = require('antd/lib/alert')
+const ajax = require('../../../lib/ajax')
+const SetTimeoutMixin = require('../../../mixin/set-timeout')
+const EnterAnimation = require('antd/lib/enter-animation')
+const History = require('../../../lib/history')
 
-export default class Register extends React.Component {
-    constructor(props) {
-        super(props)
+module.exports = React.createClass({
+    getInitialState: function () {
+        return {currentStep: 0}
+    },
 
-        let currentStep = this.initRegisterCallback()
+    componentWillMount:function(){
+        // 注册时需要用到的数据
+        this.registerData = {}
 
-        this.state = {
-            currentStep: currentStep
-        }
-    }
+        this.initRegisterCallback()
+    },
 
-    initRegisterCallback(){
+    initRegisterCallback: function () {
         // 获取url参数
-        var query = Url.parse(location.href, true).query
-        if (query.type === 'email') {
-            return 3
-        }
-        return 0
-    }
+        if (this.props.location.query.type === 'email') {
+            ajax.send('/api/auth/register', {
+                method: 'post',
+                data: this.props.location.query,
+                success: ()=> {
+                    this.setState({
+                        currentStep: 3
+                    })
 
-    render() {
+                    // 3s 后返回首页
+                    this.setTimeout(()=> {
+                        History.go('/')
+                    }, 3000)
+                }
+            })
+        }
+    },
+
+    render: function () {
         const steps = [{
             title: '基本信息'
         }, {
@@ -45,13 +58,17 @@ export default class Register extends React.Component {
                 name: 'nickname',
                 type: 'text',
                 tooltip: '长度2-10',
-                value: ''
+                onChange: (value)=> {
+                    this.registerData.nickname = value
+                }
             }, {
                 title: '密码',
                 name: 'password',
                 type: 'password',
                 tooltip: '长度6-30',
-                value: ''
+                onChange: (value)=> {
+                    this.registerData.password = value
+                }
             }],
             submit: {
                 buttonName: '下一步',
@@ -71,7 +88,9 @@ export default class Register extends React.Component {
                 title: '邮箱',
                 name: 'email',
                 type: 'text',
-                value: ''
+                onChange: (value)=> {
+                    this.registerData.email = value
+                }
             }],
             submit: {
                 buttonName: '下一步',
@@ -84,15 +103,8 @@ export default class Register extends React.Component {
                     })
 
                     // 发送邮箱注册请求
-                    let data = {}
-                    baseForm.fields.map((item, index)=> {
-                        data[item.name] = item.value
-                    })
-                    emailForm.fields.map((item, index)=> {
-                        data[item.name] = item.value
-                    })
-                    this.ajax('/api/auth/register', {
-                        data: data,
+                    ajax.send('/api/auth/register', {
+                        data: this.registerData,
                         method: 'get'
                     })
                 }
@@ -102,10 +114,10 @@ export default class Register extends React.Component {
         let formContent
         switch (this.state.currentStep) {
         case 0:
-            formContent = (<Form init={baseForm}/>)
+            formContent = (<Form key="base" init={baseForm}/>)
             break
         case 1:
-            formContent = (<Form init={emailForm}/>)
+            formContent = (<Form key="email" init={emailForm}/>)
             break
         case 2:
             formContent = (
@@ -123,20 +135,39 @@ export default class Register extends React.Component {
             break
         }
 
+        const stepAnimation = {
+            enter: {
+                type: 'right'
+            }
+        }
+
+        const formAnimation = {
+            enter: {
+                delay: 0.4,
+                type: 'bottom'
+            },
+            leave: {
+                delay: 0,
+                duration: 0.3,
+                reverse: true,
+                type: 'bottom'
+            }
+        }
+
         return (
             <div>
                 <div className="row-flex row-flex-center" style={Styles.mainContainer}>
-                    <div className="col-12">
-                        <StepBar steps={steps} currentStep={this.state.currentStep}/>
-                    </div>
+                    <EnterAnimation animation={stepAnimation.enter} className="col-12">
+                        <StepBar key="steps" steps={steps} currentStep={this.state.currentStep}/>
+                    </EnterAnimation>
                 </div>
                 <div className="row-flex row-flex-center">
                     <div className="col-8">
-                        <div style={Styles.content}>{formContent}</div>
+                        <EnterAnimation enter={formAnimation.enter} leave={formAnimation.leave}
+                                        style={Styles.content}>{formContent}</EnterAnimation>
                     </div>
                 </div>
             </div>
         )
     }
-}
-ReactMixin(Register.prototype, AjaxMixin)
+})

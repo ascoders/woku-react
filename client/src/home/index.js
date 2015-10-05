@@ -1,23 +1,28 @@
-import React from 'react'
+var React = require('react')
+var EnterAnimation = require('antd/lib/enter-animation')
+var Carousel = require('antd/lib/carousel')
+//import Style from './style.js'
 
-import NavBar from '../common/navbar/index.js'
-
-export default class Home extends React.Component {
+module.exports = React.createClass({
     render() {
+        const animation = {
+            enter: {
+                type: 'right'
+            }
+        }
+
         return (
             <div>
-                <div className="row">
-                    <div className="col-24">123</div>
-                </div>
-                <div className="row">
-                    <div className="col-16">123</div>
-                    <div className="col-8">123</div>
-                </div>
-                <div className="row">
-                    <div className="col-16">123</div>
-                    <div className="col-8">123</div>
-                </div>
+                <Carousel>
+                    <div>
+                        <button className="ant-btn ant-btn-primary ant-btn-lg">立即创建</button>
+                    </div>
+
+                    <div><h3>2</h3></div>
+                    <div><h3>3</h3></div>
+                    <div><h3>4</h3></div>
+                </Carousel>
             </div>
         )
     }
-}
+})

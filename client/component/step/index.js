@@ -1,23 +1,18 @@
-import React from 'react'
-import Steps from 'antd/lib/steps'
+var React = require('react')
+var Steps = require('antd/lib/steps')
 const Step = Steps.Step
 
-export default class StepBar extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {}
-    }
-
-    render() {
+module.exports = React.createClass({
+    render: function () {
         // 步骤栏
         const steps = this.props.steps.map(function (item, index) {
-                return (
-                    <Step key={index} title={item.title}/>
-                )
-            })
+            return (
+                <Step key={index} title={item.title}/>
+            )
+        })
 
         return (
-                <Steps current={this.props.currentStep}>{steps}</Steps>
+            <Steps className="ant-form-horizontal" current={this.props.currentStep}>{steps}</Steps>
         )
     }
-}
+})

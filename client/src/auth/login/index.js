@@ -1,15 +1,11 @@
-import React from 'react'
-import Styles from './style.js'
-import Form from '../../../component/form'
-import LoginCheck from '../../../../validate/auth/login'
+var React = require('react')
+var Styles = require('./style.js')
+var Form = require('../../../component/form')
+var LoginCheck = require('../../../../validate/auth/login')
+var EnterAnimation = require('antd/lib/enter-animation')
 
-export default class Login extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {}
-    }
-
-    render() {
+module.exports = React.createClass({
+    render: function () {
         // 登录表单配置
         const loginForm = {
             fields: [{
@@ -35,12 +31,22 @@ export default class Login extends React.Component {
             }
         }
 
+        const formAnimation = {
+            enter: {
+                type: 'bottom'
+            },
+            leave: {
+                type: 'top'
+            }
+        }
+
         return (
             <div className="row-flex row-flex-center" style={Styles.container}>
-                <div className="col-8">
-                    <Form init={loginForm}/>
-                </div>
+                <EnterAnimation enter={formAnimation.enter} leave={formAnimation.leave} style={Styles.content}
+                                className="col-8">
+                    <Form key="loginForm" init={loginForm}/>
+                </EnterAnimation>
             </div>
         )
     }
-}
+})
