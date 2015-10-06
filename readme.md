@@ -19,12 +19,12 @@
 ```shell
 brew install redis
 brew install mysql
-npm install
-npm run
 ```
 
 ## install for Windows
 手动安装 redis mysql 服务
+
+## Run
 
 ```shell
 npm install
