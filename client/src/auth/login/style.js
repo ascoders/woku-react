@@ -1,5 +1,5 @@
-export default {
-  container: {
-    marginTop: '80px'
-  }
+module.exports = {
+    container: {
+        marginTop: '80px'
+    }
 }

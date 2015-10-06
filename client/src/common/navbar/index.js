@@ -1,12 +1,14 @@
 var React = require('react')
-var Menu = require('antd/lib/menu')
 var Link = require('react-router').Link
+
+// server only
+var Menu = require('antd/lib/menu')
 
 module.exports = React.createClass({
     render: function () {
         return (
             <div>
-                <Menu defaultSelectedKeys={[this.props.location.pathname]} mode="horizontal">
+                <Menu defaultSelectedKeys={[this.props.location && this.props.location.pathname]} mode="horizontal">
                     <Menu.Item key="/">
                         <Link to="/">
                             <i className="anticon anticon-home"></i>

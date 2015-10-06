@@ -10,9 +10,9 @@
 
 测试：mocha blanket
 
-额外：css-inline
+额外：css-inline server-render
 
-放弃：class import
+暂不：class import
 
 ## install for MAC
 

@@ -4,8 +4,8 @@ try {
     secret = require('../secret')
 } catch (err) {
     secret = {
-        email:{
-            password:'null'
+        email: {
+            password: 'null'
         }
     }
 }
@@ -13,11 +13,17 @@ try {
 // 是否在测试状态
 var test = false
 
+// 是否在开发
+var debug = false
+
 var myArgs = process.argv.slice(2)
 myArgs.forEach(function (item) {
     switch (item) {
     case 'test': // 测试模式
         test = true
+        break
+    case 'debug':
+        debug = true
         break
     }
 })
@@ -40,9 +46,6 @@ exports.staticDir = {
     path: 'client/static',
     maxAge: 365 * 24 * 60 * 60
 }
-
-// 总模版文件
-exports.templatePath = 'client/src/main.html'
 
 // 数据库
 exports.db = {
@@ -69,7 +72,7 @@ exports.redis = {
 }
 
 // 调试模式
-exports.debug = true
+exports.debug = debug
 
 // 是否在测试环境
 exports.test = test

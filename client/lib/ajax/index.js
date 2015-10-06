@@ -1,3 +1,5 @@
+"use strict"
+
 var agent = require('superagent')
 var Message = require('antd/lib/message')
 

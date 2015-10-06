@@ -1,3 +1,5 @@
+"use strict"
+
 // 自动销毁timeout
 module.exports = {
     componentWillMount: function () {

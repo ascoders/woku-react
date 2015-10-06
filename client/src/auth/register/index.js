@@ -1,3 +1,5 @@
+"use strict"
+
 const React = require('react')
 const StepBar = require('../../../component/step')
 const Styles = require('./style.js')
@@ -23,7 +25,7 @@ module.exports = React.createClass({
 
     initRegisterCallback: function () {
         // 获取url参数
-        if (this.props.location.query.type === 'email') {
+        if (this.props.location&&this.props.location.query.type === 'email') {
             ajax.send('/api/auth/register', {
                 method: 'post',
                 data: this.props.location.query,

@@ -1,3 +1,5 @@
+"use strict"
+
 var React = require('react')
 var Checkbox = require('antd/lib/checkbox')
 var Radio = require('antd/lib/radio')

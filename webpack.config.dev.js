@@ -5,7 +5,7 @@ module.exports = {
     entry: [
         'webpack-dev-server/client?http://localhost:8090',
         'webpack/hot/only-dev-server',
-        './client/src/main.js'
+        './client/main.js'
     ],
     output: {
         path: __dirname + '/client/static/',

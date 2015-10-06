@@ -7,13 +7,10 @@
 var koa = require('koa')
 var app = koa()
 
-var path = require('path')
-//var http = require("http")
 var redisStore = require('koa-redis')
 var fs = require('fs')
-//var log4js = require('log4js')
 
-var conf = require('./config/config')
+var conf = require('../config/config')
 
 // koa配置
 app.name = conf.web.name
@@ -30,7 +27,7 @@ app.use(session({
 
 // 设置静态资源缓存
 var staticCache = require('koa-static-cache')
-app.use(staticCache(path.join(__dirname, conf.staticDir.path), {
+app.use(staticCache(conf.staticDir.path, {
     prefix: '/static',
     maxAge: conf.staticDir.maxAge,
     buffer: true,
@@ -46,7 +43,7 @@ app.use(conditional())
 app.use(etag())
 
 // 路由
-var router = require('./config/router.js')
+var router = require('./router')
 app.use(router.routes())
 app.use(router.allowedMethods())
 
@@ -67,7 +64,7 @@ process.on('uncaughtException', function (err) {
 })
 
 // 入口文件
-var templateHtml = fs.readFileSync(conf.templatePath, "utf-8")
+var templateHtml = require('../client/html')(conf.debug)
 app.use(function *() {
     this.type = 'text/html; charset=utf-8'
     this.body = templateHtml

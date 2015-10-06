@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     mainContainer: {
         marginTop: '80px'
     },

@@ -2,7 +2,7 @@
   "name": "woku",
   "title": "woku",
   "description": "woku with nodejs",
-  "main": "app.js",
+  "main": "server/app.js",
   "homepage": "http://wokuer.com",
   "author": "ascoders (翱翔大空)",
   "repository": {
@@ -23,6 +23,9 @@
   ],
   "dependencies": {
     "co-body": "^4.0.0",
+    "gulp": "^3.9.0",
+    "gulp-react": "^3.0.1",
+    "jsdom": "^6.5.1",
     "koa": "^1.0.0",
     "koa-bodyparser": "^2.0.1",
     "koa-conditional-get": "^1.0.3",
@@ -34,6 +37,7 @@
     "koa-static-cache": "^3.1.2",
     "log4js": "^0.6.27",
     "mysql": "^2.9.0",
+    "node-jsx": "^0.13.3",
     "node-schedule": "^0.2.9",
     "nodemailer": "^1.6.0",
     "nodemailer-smtp-transport": "^1.0.3",
@@ -69,11 +73,11 @@
     "webpack-dev-server": "^1.12.0"
   },
   "scripts": {
-    "server": "nodemon --watch validate --watch server/controllers --watch server/lib  --watch server/models app.js",
+    "server": "nodemon --watch validate --watch server/controllers --watch server/lib  --watch server/models --watch server/app.js --watch server/router.js server/app.js -- debug",
     "webpack-dev": "node webpack.js",
     "webpack-dist": "webpack -p",
-    "pm2": "pm2 start app.js",
-    "pm2-clean": "pm2 delete app.js",
+    "pm2": "pm2 start server/app.js",
+    "pm2-clean": "pm2 delete server/app.js",
     "mocha-travis": "mocha --harmony -R travis-cov --recursive test",
     "mocha-html": "mocha --harmony -R html-cov > coverage.html --recursive test",
     "mocha": "mocha --harmony test --recursive -s 10 --check-leaks --es_staging",
