@@ -2,13 +2,13 @@
 var secret = require('../secret')
 
 // 是否在测试状态
-var test = true
+var test = false
 
 var myArgs = process.argv.slice(2)
 myArgs.forEach(function (item) {
     switch (item) {
-    case 'release': // 发布模式
-        test = false
+    case 'test': // 测试模式
+        test = true
         break
     }
 })

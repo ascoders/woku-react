@@ -1,7 +1,6 @@
 var React = require('react')
 var EnterAnimation = require('antd/lib/enter-animation')
 var Carousel = require('antd/lib/carousel')
-var ReactShadow = require('react-shadow')
 var Style = require('./style.js')
 
 module.exports = React.createClass({

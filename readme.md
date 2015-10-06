@@ -30,10 +30,13 @@ brew install mysql
 # 安装依赖
 npm install
 
-# 构建
-npm run
+# 开发构建
+npm start
 
 # 测试
 npm test
+
+# 构建
+npm run dist
 ```
 
