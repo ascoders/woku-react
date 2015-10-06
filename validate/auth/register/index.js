@@ -1,9 +1,11 @@
-import Validator from 'validator'
+"use strict"
 
-export default{
+var validator = require('validator')
+
+module.exports = {
     // 帐号注册基本信息校验
-    baseCheck(data){
-        if (Validator.isNull(data.nickname)) {
+    baseCheck: function (data) {
+        if (validator.isNull(data.nickname)) {
             return {
                 ok: false,
                 data: '昵称不能为空',
@@ -11,7 +13,7 @@ export default{
             }
         }
 
-        if (!Validator.isLength(data.nickname, 2, 10)) {
+        if (!validator.isLength(data.nickname, 2, 10)) {
             return {
                 ok: false,
                 data: '昵称长度为2-10',
@@ -19,7 +21,7 @@ export default{
             }
         }
 
-        if (Validator.isNull(data.password)) {
+        if (validator.isNull(data.password)) {
             return {
                 ok: false,
                 data: '密码不能为空',
@@ -27,7 +29,7 @@ export default{
             }
         }
 
-        if (!Validator.isLength(data.password, 6, 30)) {
+        if (!validator.isLength(data.password, 6, 30)) {
             return {
                 ok: false,
                 data: '密码长度为6-30',
@@ -41,8 +43,8 @@ export default{
     },
 
     // 邮箱验证
-    emailCheck(data){
-        if (!Validator.isEmail(data.email)) {
+    emailCheck: function (data) {
+        if (!validator.isEmail(data.email)) {
             return {
                 ok: false,
                 data: '邮箱格式错误',

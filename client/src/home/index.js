@@ -1,18 +1,13 @@
 var React = require('react')
 var EnterAnimation = require('antd/lib/enter-animation')
 var Carousel = require('antd/lib/carousel')
-//import Style from './style.js'
+var ReactShadow = require('react-shadow')
+var Style = require('./style.js')
 
 module.exports = React.createClass({
-    render() {
-        const animation = {
-            enter: {
-                type: 'right'
-            }
-        }
-
+    render: function () {
         return (
-            <div>
+            <div className="test">
                 <Carousel>
                     <div>
                         <button className="ant-btn ant-btn-primary ant-btn-lg">立即创建</button>

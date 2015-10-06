@@ -10,7 +10,7 @@ module.exports = React.createClass({
         return {}
     },
 
-    onChange: function (item,event) {
+    onChange: function (item, event) {
         this.setState({
             [item.name]: event.target.value
         })
@@ -34,18 +34,30 @@ module.exports = React.createClass({
     },
 
     submit: function () {
+        // 每次提交之前都清空错误
+        this.props.init.fields.map((each)=> {
+            each.hasError = false
+        })
+
         if (this.props.init.submit.ajax) { // 提交之前发送请求
             ajax.send(this.props.init.submit.ajax, {
                 data: this.state,
                 method: this.props.init.submit.method,
                 preCheck: ()=> {
-                    return this.props.init.submit.check(this.state)
+                    if (typeof this.props.init.submit.check === 'function') {
+                        return this.props.init.submit.check(this.state)
+                    }
                 },
                 success: (data)=> {
                     this.props.init.submit.success(data)
                 },
                 error: (data)=> {
-
+                    this.props.init.fields.map((each)=> {
+                        if (each.name === data.code) {
+                            each.hasError = true
+                            return this.forceUpdate()
+                        }
+                    })
                 },
                 before: ()=> {
                     this.setState({
@@ -61,6 +73,12 @@ module.exports = React.createClass({
         } else {
             let check = this.props.init.submit.check(state)
             if (!check.ok) {
+                this.props.init.fields.map((each)=> {
+                    if (each.name === check.code) {
+                        each.hasError = true
+                        return this.forceUpdate()
+                    }
+                })
                 return Message.error(check.data)
             }
             this.props.init.submit.success(check)
@@ -92,8 +110,10 @@ module.exports = React.createClass({
                 inputContentTooltip = inputContent
             }
 
+            let errorClass = item.hasError ? 'has-error' : ''
+
             return (
-                <div className="ant-form-item" key={item.name}>
+                <div className={"ant-form-item "+errorClass} key={item.name}>
                     <label htmlFor={item.name} className="col-6" required>{item.title}：</label>
 
                     <div className="col-18">

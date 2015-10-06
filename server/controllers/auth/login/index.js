@@ -1,32 +1,36 @@
 var user = require('../../../models/user')
 var crypto = require('crypto')
 var validator = require('validator')
+var loginCheck = require('../../../../validate/auth/login')
 
 // 用户登陆
 exports.index = {
     get: function* () {
+        // check
+        var check = loginCheck.check(this.query)
+        if (!check.ok) {
+            return this.body = {
+                ok: false,
+                data: check.data,
+                code: check.code
+            }
+        }
+
         // 用户信息
         var result = {}
 
-        if (!validator.isEmail(this.query.account)) { // 不是邮箱
-            if (!validator.isLength(this.query.account, 2, 10)) {
-                return this.body = {
-                    ok: false,
-                    data: '昵称长度为2-10'
-                }
-            }
-
-            // 根据昵称查找用户
-            result = yield user.findOne({
-                where: {
-                    nickname: this.query.account
-                }
-            })
-        } else {
+        if (check.type === 'email') {
             // 根据邮箱查找用户
             result = yield user.findOne({
                 where: {
                     email: this.query.account
+                }
+            })
+        } else {
+            // 根据昵称查找用户
+            result = yield user.findOne({
+                where: {
+                    nickname: this.query.account
                 }
             })
         }

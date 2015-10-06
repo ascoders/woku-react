@@ -7,17 +7,17 @@ const Alert = require('antd/lib/alert')
 const ajax = require('../../../lib/ajax')
 const SetTimeoutMixin = require('../../../mixin/set-timeout')
 const EnterAnimation = require('antd/lib/enter-animation')
-const History = require('../../../lib/history')
 
 module.exports = React.createClass({
+    mixins: [SetTimeoutMixin],
+
     getInitialState: function () {
         return {currentStep: 0}
     },
 
-    componentWillMount:function(){
+    componentWillMount: function () {
         // 注册时需要用到的数据
         this.registerData = {}
-
         this.initRegisterCallback()
     },
 
@@ -34,7 +34,7 @@ module.exports = React.createClass({
 
                     // 3s 后返回首页
                     this.setTimeout(()=> {
-                        History.go('/')
+                        this.props.history.go('/')
                     }, 3000)
                 }
             })

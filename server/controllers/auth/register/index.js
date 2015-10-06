@@ -5,10 +5,28 @@ var crypto = require('crypto')
 var conf = require('../../../../config/config')
 var validator = require('validator')
 var parse = require('co-body')
+var registerCheck = require('../../../../validate/auth/register')
 
 exports.index = {
     // 发送注册邮件
     get: function* () {
+        // 校验
+        var baseCheck = registerCheck.baseCheck(this.query)
+        if (!baseCheck.ok) {
+            return this.body = {
+                ok: false,
+                data: baseCheck.data
+            }
+        }
+
+        var emailCheck = registerCheck.emailCheck(this.query)
+        if (!emailCheck.ok) {
+            return this.body = {
+                ok: false,
+                data: emailCheck.data
+            }
+        }
+
         // 随机生成token
         var token
         try {
