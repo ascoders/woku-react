@@ -1,6 +1,6 @@
 node_modules
 
-static
+client/static
 
 coverage*
 

@@ -1,5 +1,14 @@
 // 敏感token
-var secret = require('../secret')
+var secret
+try {
+    secret = require('../secret')
+} catch (err) {
+    secret = {
+        email:{
+            password:'null'
+        }
+    }
+}
 
 // 是否在测试状态
 var test = false

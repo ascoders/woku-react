@@ -72,13 +72,15 @@
     "server": "nodemon --watch validate --watch server/controllers --watch server/lib  --watch server/models app.js",
     "webpack-dev": "node webpack.js",
     "webpack-dist": "webpack -p",
-    "pm2": "pm2 start --merge-logs -i 0 app.js",
+    "pm2": "pm2 start app.js",
+    "pm2-clean": "pm2 delete app.js",
     "mocha-travis": "mocha --harmony -R travis-cov --recursive test",
     "mocha-html": "mocha --harmony -R html-cov > coverage.html --recursive test",
     "mocha": "mocha --harmony test --recursive -s 10 --check-leaks --es_staging",
     "start": "npm run server & npm run webpack-dev",
     "test": "npm run mocha-travis && npm run mocha-html && npm run mocha",
-    "dist": "npm run webpack-dist && npm run pm2"
+    "dist": "npm run webpack-dist && npm run pm2",
+    "clear": "npm run pm2-clean"
   },
   "config": {
     "blanket": {
