@@ -27,7 +27,13 @@ brew install mysql
 ## Run
 
 ```shell
+# 安装依赖
 npm install
+
+# 构建
 npm run
+
+# 测试
+npm test
 ```
 
