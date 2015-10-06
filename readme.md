@@ -6,7 +6,7 @@
 
 前端：react flux antd
 
-后端：koa
+后端：koa mysql redis
 
 测试：mocha blanket
 
