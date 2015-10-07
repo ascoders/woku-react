@@ -1,4 +1,4 @@
-var email = require('./index')
+var email = require('../../../server/lib/email')
 
 describe("lib/email", function () {
     it("邮件发送成功", function* () {
