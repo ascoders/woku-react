@@ -1,7 +1,7 @@
 var user = require('../../../models/user')
 var crypto = require('crypto')
 var validator = require('validator')
-var loginCheck = require('../.././auth/login')
+var loginCheck = require('../../../validate/auth/login')
 
 // 用户登陆
 exports.index = {

@@ -2,8 +2,8 @@ var conf = require('../../../config/config')
 var host = 'http://localhost:' + conf.web.port + '/api'
 
 var agent = require('superagent').agent()
-var userModel = require('../.././user/model')
-var user = require('../.././user')
+var userModel = require('../../../models/user/model')
+var user = require('../../../models/user')
 
 describe("controllers", function () {
     describe("auth", function () {
@@ -18,7 +18,6 @@ describe("controllers", function () {
                     password: 'abcdef',
                     email: '576625322@qq.com'
                 })
-                // console.log(result)
                 result.ok.should.equal(true)
             })
 

@@ -28,9 +28,9 @@ controllers.forEach(function (path) {
     // 遍历出来的各个目录
     var instance
     try {
-        instance = require(path)
-    } catch (err) {}
-
+        instance = require(path.replace('server/', './'))
+    } catch (err) {
+    }
 
     // 遍历每个方法
     for (var key in instance) {

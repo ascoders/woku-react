@@ -5,7 +5,7 @@ var crypto = require('crypto')
 var conf = require('../.././config')
 var validator = require('validator')
 var parse = require('co-body')
-var registerCheck = require('../.././auth/register')
+var registerCheck = require('../../../validate/auth/register')
 
 exports.index = {
     // 发送注册邮件
@@ -73,12 +73,29 @@ exports.index = {
             limit: '1kb'
         })
 
+        // 验证url签名
         var check = sign.check(this.session.registerToken, body)
-
         if (!check.ok) {
             return this.body = {
                 ok: false,
                 data: check.data
+            }
+        }
+
+        // 校验
+        var baseCheck = registerCheck.baseCheck(body)
+        if (!baseCheck.ok) {
+            return this.body = {
+                ok: false,
+                data: baseCheck.data
+            }
+        }
+
+        var emailCheck = registerCheck.emailCheck(body)
+        if (!emailCheck.ok) {
+            return this.body = {
+                ok: false,
+                data: emailCheck.data
             }
         }
 
