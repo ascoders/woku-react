@@ -46,3 +46,28 @@ npm run clean
 开发环境默认端口`8080`，生产环境默认端口`80`
 
 开发环境的热编译资源端口默认为`9090`
+
+## 项目结构
+
+~~~js
+client // 客户端
+|---- component // 组件
+|---- lib       // 库文件
+|---- mixin     // mixin
+|---- src       // 业务
+|---- test      // 测试
+|---- html.js   // html模板
+|---- router.js // 路由
+|---- main.js   // 入口
+
+server // 服务端
+|---- config        // 配置
+|---- controllers   // 控制器
+|---- models        // 模型
+|---- lib           // 库文件
+|---- render        // 服务端渲染
+|---- validate      // 校验
+|---- test          // 测试
+|---- ruoter.js     // 路由
+|---- app.js        // 入口
+~~~
