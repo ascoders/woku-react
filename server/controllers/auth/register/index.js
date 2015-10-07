@@ -2,10 +2,10 @@ var user = require('../../../models/user')
 var email = require('../../../lib/email')
 var sign = require('../../../lib/sign')
 var crypto = require('crypto')
-var conf = require('../../../../config/config')
+var conf = require('../.././config')
 var validator = require('validator')
 var parse = require('co-body')
-var registerCheck = require('../../../../validate/auth/register')
+var registerCheck = require('../.././auth/register')
 
 exports.index = {
     // 发送注册邮件

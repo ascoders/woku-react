@@ -1,7 +1,7 @@
 var React = require('react')
 var Styles = require('./style.js')
 var Form = require('../../../component/form')
-var LoginCheck = require('../../../../validate/auth/login')
+var LoginCheck = require('../../../../server/validate/auth/login')
 var EnterAnimation = require('antd/lib/enter-animation')
 
 module.exports = React.createClass({

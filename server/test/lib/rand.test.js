@@ -8,8 +8,6 @@ describe("lib/rand", function () {
 
     it("范围随机", function* () {
         var result = rand.range(0, 3)
-        // result.should.be.aboveOrEqual(0)
-        // result.should.be.belowOrEqual(3)
         result.should.be.within(0, 3)
     })
 })

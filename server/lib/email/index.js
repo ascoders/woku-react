@@ -1,5 +1,5 @@
 // 发邮件总是异步的
-var conf = require('../../../config/config')
+var conf = require('../../config/config')
 var nodemailer = require("nodemailer")
 var smtpTransport = require('nodemailer-smtp-transport')
 

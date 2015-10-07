@@ -27,6 +27,7 @@ describe('models/user', function () {
     })
 
     describe('插入', function () {
+        console.log(99999)
         it('可以成功', function* () {
             var result = yield user.add({
                 nickname: 'test',

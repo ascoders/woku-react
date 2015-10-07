@@ -33,14 +33,14 @@ npm install
 # 开发构建
 npm start
 
-# 测试
+# 测试&覆盖率
 npm test
 
 # 生产环境运行
-npm run dist
+npm run dest
 
 # 终止生产环境运行
-npm run clear
+npm run clean
 ```
 
 开发环境默认端口`8080`，生产环境默认端口`80`

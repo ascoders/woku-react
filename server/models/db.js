@@ -1,4 +1,4 @@
-var conf = require('../../config/config')
+var conf = require('../config/config')
 var Sequelize = require('sequelize')
 
 module.exports = new Sequelize(conf.db.name, conf.db.user, conf.db.password, {

@@ -1,5 +1,5 @@
 var redis = require('redis')
-var conf = require('../../../config/config')
+var conf = require('../../config/config')
 var client = redis.createClient(conf.redis.port, conf.redis.host)
 
 exports.client = client

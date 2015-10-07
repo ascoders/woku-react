@@ -10,7 +10,7 @@ var app = koa()
 var redisStore = require('koa-redis')
 var fs = require('fs')
 
-var conf = require('../config/config')
+var conf = require('./config/config')
 
 // koa配置
 app.name = conf.web.name
