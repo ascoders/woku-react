@@ -8,7 +8,7 @@
 
 后端：koa mysql redis
 
-测试：mocha blanket
+测试：mocha istanbul
 
 额外：css-inline server-render
 
@@ -31,13 +31,13 @@ brew install mysql
 npm install
 
 # 开发构建
-npm start
+npm run build
 
 # 测试&覆盖率
-npm test
+npm run test
 
 # 生产环境运行
-npm run dest
+npm run release
 
 # 终止生产环境运行
 npm run clean

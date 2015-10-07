@@ -53,7 +53,6 @@
     "babel-core": "^5.8.25",
     "babel-loader": "^5.3.2",
     "babel-runtime": "^5.8.25",
-    "blanket": "^1.1.7",
     "co-mocha": "^1.1.2",
     "css-loader": "^0.19.0",
     "extract-text-webpack-plugin": "^0.8.2",
@@ -78,14 +77,14 @@
     "webpack-dev-server": "^1.12.0"
   },
   "scripts": {
-    "server": "nodemon --watch validate --watch server/controllers --watch server/lib  --watch server/models --watch server/app.js --watch server/router.js server/app.js -- debug",
-    "webpack-dev": "node webpack.js",
+    "server": "DEBUG=true nodemon --watch validate --watch server/controllers --watch server/lib --watch server/models --watch server/app.js --watch server/router.js server/app.js",
+    "webpack-dev": "DEBUG=true node webpack.js",
     "webpack-dist": "webpack -p",
     "pm2": "pm2 start server/app.js",
     "pm2-clean": "pm2 delete server/app.js",
-    "start": "npm run server & npm run webpack-dev",
-    "test": "istanbul cover _mocha -- -R spec server/test -r co-mocha -r should --recursive -s 10 --check-leaks --es_staging",
-    "dest": "npm run webpack-dist && npm run pm2",
+    "build": "npm run server & npm run webpack-dev",
+    "test": "TEST=true istanbul cover _mocha server/test -- -R spec -r co-mocha -r should --recursive -s 10 --check-leaks --es_staging",
+    "release": "npm run webpack-dist && npm run pm2",
     "clean": "npm run pm2-clean"
   },
   "config": {

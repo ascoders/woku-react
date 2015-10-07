@@ -11,22 +11,10 @@ try {
 }
 
 // 是否在测试状态
-var test = false
+var test = process.env.TEST || false
 
 // 是否在开发
-var debug = false
-
-var myArgs = process.argv.slice(2)
-myArgs.forEach(function (item) {
-    switch (item) {
-    case 'test': // 测试模式
-        test = true
-        break
-    case 'debug':
-        debug = true
-        break
-    }
-})
+var debug = process.env.DEBUG || false
 
 // 网站
 exports.web = {
