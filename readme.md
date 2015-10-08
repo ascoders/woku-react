@@ -43,7 +43,7 @@ brew install mysql
 # 安装依赖
 npm install
 
-# 开发构建
+# 构建
 npm run build
 ```
 
@@ -52,10 +52,10 @@ npm run build
 # 安装依赖
 npm install
 
-# 生产环境运行
+# 运行
 npm run release
 
-# 终止生产环境运行
+# 终止运行
 npm run clean
 ```
 
