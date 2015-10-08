@@ -4,7 +4,7 @@
   "description": "woku with nodejs",
   "main": "server/app.js",
   "homepage": "http://wokuer.com",
-  "author": "ascoders (翱翔大空)",
+  "author": "ascoders",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ascoders/woku-node.git"
