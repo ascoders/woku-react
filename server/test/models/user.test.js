@@ -62,15 +62,7 @@ describe('models/user', function () {
             })
             result.ok.should.equal(false)
         })
-/*
-        it('昵称不能为空', function* () {
-            var result = yield user.add({
-                password: 'abcdef',
-                email: '576625322@qq.com'
-            })
-            result.ok.should.equal(false)
-        })
-*/
+
         it('昵称不能重复', function* () {
             var result = yield user.add({
                 nickname: 'test',
@@ -85,41 +77,7 @@ describe('models/user', function () {
             })
             result.ok.should.equal(false)
         })
-/*
-        it('密码不能为空', function* () {
-            var result = yield user.add({
-                nickname: 'test',
-                email: '576625322@qq.com'
-            })
-            result.ok.should.equal(false)
-        })
 
-        it('密码长度大于6', function* () {
-            var result = yield user.add({
-                nickname: 'test',
-                password: 'abcde',
-                email: '576625322@qq.com'
-            })
-            result.ok.should.equal(false)
-        })
-
-        it('密码长度小于30', function* () {
-            var result = yield user.add({
-                nickname: 'test',
-                password: 'abcdeabcdeabcdeabcdeabcdeabcdea',
-                email: '576625322@qq.com'
-            })
-            result.ok.should.equal(false)
-        })
-
-        it('邮箱不能为空', function* () {
-            var result = yield user.add({
-                nickname: 'test',
-                password: 'abcdef'
-            })
-            result.ok.should.equal(false)
-        })
-*/
         it('邮箱不能重复', function* () {
             var result = yield user.add({
                 nickname: 'test1',
@@ -134,16 +92,6 @@ describe('models/user', function () {
             })
             result.ok.should.equal(false)
         })
-/*
-        it('邮箱格式校验', function* () {
-            var result = yield user.add({
-                nickname: 'test',
-                password: 'abcdef',
-                email: '576625322qq.com'
-            })
-            result.ok.should.equal(false)
-        })
- */
     })
 
     describe('删除', function () {

@@ -5,21 +5,10 @@ var crypto = require('crypto')
 var rand = require('../../lib/rand/index')
 var loginCheck = require('../../validate/auth/login')
 
-function randomString(number) {
-    return function (done) {
-        crypto.randomBytes(number, function (err, buf) {
-            if (err) {
-                return done(null, '')
-            }
-            return done(null, buf.toString('hex'))
-        })
-    }
-}
-
 // 增
 exports.add = function *(info) {
     // 随机生成token
-    info.token = yield randomString(16)
+    info.token = yield rand.randomToken()
 
     // 密码md5
     info.password = crypto.createHash('md5').update(info.password + info.token).digest('hex')

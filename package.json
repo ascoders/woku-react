@@ -86,7 +86,7 @@
     "build": "npm run server & npm run webpack-dev",
     "server-test": "TEST=true node server/app.js",
     "mocha": "TEST=true istanbul cover _mocha server/test -- -R spec -r co-mocha -r should --recursive -s 10 --check-leaks --es_staging",
-    "test": "npm run pm2-test && npm run mocha && npm run pm2-clean",
+    "test": "npm run mocha",
     "release": "npm run webpack-dist && npm run pm2",
     "clean": "npm run pm2-clean"
   },

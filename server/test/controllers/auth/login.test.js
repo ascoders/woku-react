@@ -5,6 +5,8 @@ var agent = require('superagent').agent()
 var userModel = require('../../../models/user/model')
 var user = require('../../../models/user')
 
+require('../../../app')
+
 describe("controllers", function () {
     describe("auth", function () {
         describe("login", function () {

@@ -2,10 +2,11 @@ var user = require('../../../models/user')
 var email = require('../../../lib/email')
 var sign = require('../../../lib/sign')
 var crypto = require('crypto')
-var conf = require('../.././config')
+var conf = require('../../../config/config')
 var validator = require('validator')
 var parse = require('co-body')
 var registerCheck = require('../../../validate/auth/register')
+var rand = require('../../../lib/rand')
 
 exports.index = {
     // 发送注册邮件
@@ -27,19 +28,8 @@ exports.index = {
             }
         }
 
-        // 随机生成token
-        var token
-        try {
-            token = crypto.randomBytes(16).toString('hex')
-        } catch (err) {
-            return this.body = {
-                ok: false,
-                data: '生成随机token失败'
-            }
-        }
-
         // 在session中设置注册token
-        this.session.registerToken = token
+        this.session.registerToken = yield rand.randomToken()
 
         var dataUrl = sign.create(this.session.registerToken, 60 * 60, {
             nickname: this.query.nickname,

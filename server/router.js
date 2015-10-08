@@ -30,6 +30,7 @@ controllers.forEach(function (path) {
     try {
         instance = require(path.replace('server/', './'))
     } catch (err) {
+
     }
 
     // 遍历每个方法
