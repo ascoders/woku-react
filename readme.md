@@ -38,15 +38,19 @@ brew install mysql
 
 ## Run
 
+### 开发
 ```shell
 # 安装依赖
 npm install
 
 # 开发构建
 npm run build
+```
 
-# 测试&覆盖率
-npm run test
+### 服务器部署
+```shell
+# 安装依赖
+npm install
 
 # 生产环境运行
 npm run release
@@ -54,6 +58,12 @@ npm run release
 # 终止生产环境运行
 npm run clean
 ```
+
+### 测试
+```shell
+# 测试&覆盖率
+npm run test
+~~~
 
 开发环境默认端口`8080`，生产环境默认端口`80`
 
