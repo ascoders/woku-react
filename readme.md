@@ -39,6 +39,7 @@ brew install mysql
 ## Run
 
 ### 开发
+
 ```shell
 # 安装依赖
 npm install
@@ -48,6 +49,7 @@ npm run build
 ```
 
 ### 服务器部署
+
 ```shell
 # 安装依赖
 npm install
@@ -60,6 +62,7 @@ npm run clean
 ```
 
 ### 测试
+
 ```shell
 # 测试&覆盖率
 npm run test
