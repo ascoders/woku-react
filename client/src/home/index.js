@@ -2,13 +2,15 @@ var React = require('react')
 var Carousel = require('antd/lib/carousel')
 var Style = require('./style.js')
 
+var CreateAppModal = require('./create-app-modal')
+
 module.exports = React.createClass({
     render: function () {
         return (
             <div className="test">
                 <Carousel>
                     <div>
-                        <button className="ant-btn ant-btn-primary ant-btn-lg">立即创建</button>
+                        <CreateAppModal/>
                     </div>
 
                     <div><h3>2</h3></div>

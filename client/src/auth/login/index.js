@@ -41,10 +41,14 @@ module.exports = React.createClass({
         }
 
         return (
-            <div className="row-flex row-flex-center" style={Styles.container}>
-                <EnterAnimation enter={formAnimation.enter} leave={formAnimation.leave} style={Styles.content}
+            <div className="row-flex row-flex-center"
+                 style={Styles.container}>
+                <EnterAnimation enter={formAnimation.enter}
+                                leave={formAnimation.leave}
+                                style={Styles.content}
                                 className="col-8">
-                    <Form key="loginForm" init={loginForm}/>
+                    <Form key="loginForm"
+                          init={loginForm}/>
                 </EnterAnimation>
             </div>
         )

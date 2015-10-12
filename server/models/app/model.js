@@ -1,7 +1,7 @@
 var sequelize = require('sequelize')
 var db = require('../db')
 
-var db = base.define('app', {
+var model = base.define('app', {
     id: {
         comment: '主键',
         type: sequelize.INTEGER.UNSIGNED,
